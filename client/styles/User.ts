@@ -15,8 +15,26 @@ export const Body = styled.div`
     }
 `
 
+export const Div = styled.div`
+    display: flex;
+`
+
 export const VideoDiv = styled.div`
     display: flex;
+    align-items: end;
+`
+
+export const MenuDiv = styled.div`
+    position: absolute;
+    display: flex;
+    justify-content: space-between;
+    padding: 10px;
+    color: white;
+    user-select: none;
+    z-index: 1;
+    i{
+        color: "white";
+    }
 `
 
 export const ChatBorder = styled.div`
@@ -33,9 +51,11 @@ export const ChatList = styled.ul`
     height: 386px;
     display: flex;
     flex-direction: column;
-    padding: 10px 0px 10px 0px;
+    padding: 10px;
+    padding-bottom: 0;
     margin: 0;
     box-sizing: border-box;
+    font-size: 15px;
     ::-webkit-scrollbar {
         width: 10px;
     }
@@ -46,6 +66,10 @@ export const ChatList = styled.ul`
     ::-webkit-scrollbar-track {
       background-color: rgba(0, 0, 0, 0);
     }
+    li{
+        display: flex;
+        align-items: center;
+    }
 `
 
 export const InputDiv = styled.div`
@@ -53,6 +77,7 @@ export const InputDiv = styled.div`
     display: flex;
     flex-direction: column;
     box-sizing: border-box;
+    padding: 0px 10px;
     input{
         border-radius: 5px;
         padding: 9px 10px;
@@ -77,8 +102,13 @@ export const InputDiv = styled.div`
 export const InfoDiv = styled.div`
     margin-top: 20px;
     display: flex;
+    align-items: center;
     img{
         height: 60px;
         border-radius: 50%;
+    }
+    h2{
+        margin: 0;
+        margin-left: 15px;
     }
 `

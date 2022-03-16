@@ -28,7 +28,11 @@ const Header = () => {
             <Link href={"/"}>
                 <img src="https://t1.daumcdn.net/cfile/tistory/9971C8435C64FD6610"/>
             </Link>
-            <input />
+            <div>
+                <input placeholder='검색' />
+                <button><i class="fa-solid fa-magnifying-glass"></i></button>
+            </div>
+            <S.GoogleLogin>
             <GoogleLogin 
                 buttonText='로그인' 
                 icon={false} 
@@ -38,6 +42,7 @@ const Header = () => {
                 onSuccess={onSuccess}
                 onFailure={onFailure}
             />
+            </S.GoogleLogin>
         </S.Header>       
     )
 }

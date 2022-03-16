@@ -35,12 +35,76 @@ const User = () => {
   })
 
   socket.on("video", (data) => {
-    videoRef.current.srcObject = data;
+    //videoRef.current.srcObject = data;
   })
 
   socket.on("c", (data) => {
     setCount(data);
   })
+
+  const pcConfig = {
+    'iceServers': [{
+      urls: 'stun:stun.l.goole.com:19302'
+    },
+    {urls: 'turn:numb.viagenie.ca',
+     credential: "mazkh",
+     username: "webrtc@live.com"
+    }
+  ]};
+
+  const stream = () => {
+    const localStream = navigator.mediaDevices.getUserMedia({video: true, audio: true});
+    createPeerConection();
+    var pc = new RTCPeerConnection(pcConfig)
+    /*
+    videoRef.current.srcObject.getTracks().forEach(track => {
+        peerConnection.addTrack(track, localStream);
+    });
+    const s = navigator.mediaDevices.getUserMedia(CONSTRAINTS);
+    if (videoRef && videoRef.current && !videoRef.current.srcObject) {
+      videoRef.current.srcObject = s;
+      //console.log(typeof(s));
+      socket.emit("stream", s)
+    }*/
+  }
+
+  return(
+      <S.Body>
+          <S.Div>
+          <S.VideoDiv>
+            <video autoPlay ref={videoRef} id="video"/>
+            <S.MenuDiv>
+              <i className="fa fa-volume fa-lg" style={{color:"white"}}></i>
+              <i className="fa fa-expand-wide fa-lg" style={{color:"white"}}></i>
+            </S.MenuDiv>
+          </S.VideoDiv>
+          <S.ChatBorder>
+            <S.ChatList>
+            {list.map(
+              i => {
+                return(
+                  <li>{i}</li>
+                )
+              }
+            )}
+            </S.ChatList>
+            <S.InputDiv>
+              <input onChange={(e)=>setInput(e.target.value)} value={input} placeholder='메세지 보내기'/>
+              <button onClick={()=>sendMessage()}>채팅</button>
+              <button onClick={()=>stream()}>방송</button>
+              <spam>{count}</spam>
+            </S.InputDiv>
+          </S.ChatBorder>
+          </S.Div>
+          <S.InfoDiv>
+            <img src="https://yt3.ggpht.com/ytc/AKedOLQf9XARnp2yzFCo9D8hFKckDRRtCXDJTcYLY2wwRw=s88-c-k-c0x00ffffff-no-rj"/>
+            <h2>제목</h2>
+          </S.InfoDiv>
+      </S.Body>
+  )
+}
+
+export default User
 
     //let newPC = new RTCPeerConnection();
 /*
@@ -142,46 +206,3 @@ const User = () => {
         videoRef.current.srcObject = v;
     })
 */
-    const CONSTRAINTS = { audio: true, video: true };
-
-    useEffect(()=>{
-      if(onStream){
-        const s = navigator.mediaDevices.getUserMedia(CONSTRAINTS);
-        if (videoRef && videoRef.current && !videoRef.current.srcObject) {
-          console.log(typeof(s));
-          socket.emit("stream", s)
-        }
-      }
-    })
-
-    return(
-        <S.Body>
-            <S.VideoDiv>
-            <video autoPlay ref={videoRef} id="video"/>
-            <S.ChatBorder>
-              <S.ChatList>
-              {list.map(
-                i => {
-                  return(
-                    <li>{i}</li>
-                  )
-                }
-              )}
-              </S.ChatList>
-              <S.InputDiv>
-                <input onChange={(e)=>setInput(e.target.value)} value={input} placeholder='메세지 보내기'/>
-                <button onClick={()=>sendMessage()}>채팅</button>
-                <button onClick={()=>setOnStream(true)}>방송</button>
-                <spam>{count}</spam>
-              </S.InputDiv>
-            </S.ChatBorder>
-            </S.VideoDiv>
-            <S.InfoDiv>
-              <img src="https://yt3.ggpht.com/ytc/AKedOLQf9XARnp2yzFCo9D8hFKckDRRtCXDJTcYLY2wwRw=s88-c-k-c0x00ffffff-no-rj"/>
-              <h2>제목</h2>
-            </S.InfoDiv>
-        </S.Body>
-    )
-}
-
-export default User

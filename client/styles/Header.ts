@@ -17,27 +17,35 @@ export const Header = styled.header`
         cursor: pointer;
     }
     button{
-        height: 30px;
-        cursor: pointer;
-        color: #333;
         border: 0;
-        width: 70px;
-        font-weight: bold;
-        border-radius: 5px;
-        span{
-            padding: 0;
-        }
-        :hover{
-            background-color: #ccc;
-        }
+        border-radius: 0px 5px 5px 0px;
     }
     input{
         height: 30px;
         width: 400px;
-        border-radius: 5px;
         border: 0;
         background-color: #efefef;
         outline: 0;
         padding: 0px 10px;
+        border-radius: 5px 0px 0px 5px;
+    }
+`
+
+export const GoogleLogin = styled.div`
+    height: 30px;
+    cursor: pointer;
+    background-color: #eee;
+    border: 0;
+    outline: 0;
+    color: #333;
+    border: 0;
+    width: 70px;
+    font-weight: bold;
+    border-radius: 5px;
+    span{
+        padding: 0;
+    }
+    :hover{
+        background-color: #ccc;
     }
 `
